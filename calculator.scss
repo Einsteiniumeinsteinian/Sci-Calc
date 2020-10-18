@@ -1,0 +1,92 @@
+body{
+    height: 100%;
+    width: 100%;
+    background-color: black !important;
+    font-family: 'Secular One', sans-serif !important;
+}
+.container{
+    margin-top: 20%;
+    text-align: center;
+    border: 2px solid pink;
+
+}
+button{
+    margin: 1% 0 !important;
+    width: 11%;
+    height: 43px;
+    outline:none !important;
+    border: 1px #343a40 solid;
+    background-color: black;
+    color: blanchedalmond;
+    border-radius: 12px !important;
+
+    &:hover{
+        background-color: rgb(196, 24, 81);
+        color: black;
+    }
+}
+
+
+
+#equalsign{
+    background-color: rgb(196, 24, 81);
+}
+
+#displaydiv{
+    height: 100px;
+    width: 45%;
+    margin: auto;
+    padding:5px 10px;
+    padding-top: 0;
+    padding-left: 0;
+    background-color: blanchedalmond;
+    text-align: center;
+    border: #343a40 3px solid;
+}
+#inputdisplay{
+    float: left;
+    margin-left: 10px;
+}
+#shiftdisplay{
+    float: left;
+    margin-left: 1%;
+    margin-right: 3%;
+}
+#signdisplay{
+    margin-left: 1%;
+}
+#answerdisplay{
+float: right;
+padding-top: 10%;
+  
+}
+.altkeys{
+    float: right;
+}
+.superscript{
+    width: 50%;
+    float: left;
+    text-align: left;
+    font-size: 8px;
+    line-height: 1px;
+    margin-left: 7%;
+}
+.mainbtn{
+    margin-right: 15%;
+height: 10px;
+    float: center;
+    font-size: 13px;
+}
+#fullstopbtn{
+    margin-right: 36%;
+    margin-left: 30%;
+}
+
+#topdisplay{
+    text-align: left;
+    font-size: 10px;
+    font-weight:bolder ;
+    height: 10px;
+    line-height: 6px;
+}
+
