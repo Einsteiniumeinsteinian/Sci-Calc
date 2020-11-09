@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+    <title>Document</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="./calculator.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body id="body">
+    <div class="container">
+        <h1 class="glow">
+            hello..... user!!!!
+        </h1>
+        <button id="mode-btn-one" class="mode-btn" onmouseover="onHover(this)"
+            onmouseout="hoverOut(this)">Style</button>
+
+        <div id="calc-body">
+            <p id="p">
+                <strong><span>ooo</span><em>Einstein.Calc</em> <span>ooo</span></strong>
+            </p>
+            <div id="displaydiv">
+                <div id="topdisplay">
+                    <span id="shiftdisplay"></span>
+                    <span id="signdisplay"></span>
+                </div>
+
+                <span id="inputdisplay"></span>
+                <br>
+                <span id="answerdisplay"></span>
+
+            </div>
+            <div id="content">
+                <!-- Button Group 1 -->
+                <button class="special-key-btn" id="shiftkey" onmouseover="onHover(this)"
+                    onmouseout="hoverOut(this)">SHIFT</button>
+                <button id="bracketopen" onmouseover="onHover(this)" onmouseout="hoverOut(this)">(</button>
+                <button id="bracketclose" onmouseover="onHover(this)" onmouseout="hoverOut(this)">)</button>
+                <button id="ac" onmouseover="onHover(this)" onmouseout="hoverOut(this)">AC</button>
+                <br>
+                <!-- button Group 2  -->
+                <button id="avrgnum" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>avrg</span>
+                    </div>
+                    <span class="mainbtn">%</span>
+                </button>
+                <button id="roots" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>X<sup>2</sup></span>
+                    </div>
+                    <span class="mainbtn">X<sup>√</sup></span>
+                </button>
+                <button id="number-system-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>oct</span>
+                    </div>
+                    <span class="mainbtn">Bin</span>
+                </button>
+                <button id="sin-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>sin<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">sin</span>
+                </button>
+                <br>
+                <!-- Button Group 3 -->
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">1</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">2</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">3</button>
+                <button id="cos-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>cos<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">cos</span>
+                </button>
+                <!-- Button Group 4 -->
+                <br>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">4</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">5</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">6</button>
+                <button id="tan-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>tan<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">tan</span>
+                </button>
+                <br>
+                <!-- Button Group 5 -->
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">7</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">8</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">9</button>
+                <button id="sinh-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>sinh<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">sinh</span>
+                </button>
+                <br>
+                <!-- Button Group 6 -->
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">0</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">-</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">+</button>
+                <button id="cosh-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>cosh<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">cosh</span>
+                </button>
+                <br>
+                <!-- Button Group 7 -->
+                <button id="decimalandcomma" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>,</span>
+                    </div>
+                    <span id="fullstopbtn" class="mainbtn">.</span>
+                </button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">/</button>
+                <button class=" stateoff" onmouseover="onHover(this)" onmouseout="hoverOut(this)">*</button>
+                <button id="tanh-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>tanh<sup>-1</sup></span>
+                    </div>
+                    <span class="mainbtn">tanh</span>
+                </button>
+                <br>
+                <!-- Button Group 8 -->
+                <button id="rnd-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">
+                    <div class="superscript">
+                        <span>π</span>
+                    </div>
+                    <span class="mainbtn">Rnd</span>
+                </button>
+                <button id="backkey" onmouseover="onHover(this)" onmouseout="hoverOut(this)">Back</button>
+                <button id="ans-btn" onmouseover="onHover(this)" onmouseout="hoverOut(this)">ans</button>
+                <button id="equalsign" onmouseover="onHover(this)" onmouseout="hoverOut(this)">=</button>
+            </div>
+        </div>
+        <button id="mode-btn-two" class="mode-btn" onmouseover="onHover(this)"
+            onmouseout="hoverOut(this)">Style</button>
+    </div>
+
+    <script src="./js/main.js"></script>
+    <script src="./js/style.js"></script>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

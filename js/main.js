@@ -4,7 +4,9 @@ var answerArray = [];
 var buttons = document.getElementsByClassName("stateoff");
 var inputDisplay = document.querySelector("#inputdisplay");
 var answerDisplay = document.querySelector("#answerdisplay");
+var rndBtn = document.querySelector("#rnd-btn")
 var equalToBtn = document.querySelector("#equalsign");
+var answerBtn = document.getElementById("ans-btn")
 var acClearBtn = document.querySelector("#ac");
 var avrgNumBtn = document.querySelector("#avrgnum");
 var decimalAndCommaBtn = document.querySelector("#decimalandcomma");
@@ -25,41 +27,49 @@ var SpecialDisplay = document.querySelector("#signdisplay")
 var stateOn = false;
 var avrgNumOn = false;
 var BinaryStateOn = false;
+var octetStateOn = false;
 var sumOfNum = 0;
 var conditionalValue;
-var anwser = 0;
+var answer = 0;
 var groupInputArray;
 var groupAnswerArray;
 var deletedAnswer;
 var didYouDelete = false;
 
 
-for (var i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function () {
-        if (inputArray.length < 23) {
+numericButtonInputs()
+// round-off button
+rndBtn.addEventListener("click", function () {
 
-            if (Number(inputArray[0]) === 0) {
-                inputDisplay.textContent = "";
-                inputArray = []
-                answerArray = []
-            }
-            else {
+    if (stateOn) {
+        // pie
+        inputs("π", "Math.PI")
+    }
+    else {
+        //   round off
+        var roundedNumber = Math.round(answer)
+        answerDisplay.textContent = answerDisplay.textContent = "Rnd = " + roundedNumber;
 
-                if (conditionalValue === 1) {
-                    inputArray.push(this.textContent);
-                    groupInputArray = inputArray.join("");
-                    inputDisplay.textContent = "Input;  " + groupInputArray;
-                    didYouDelete = false
+    }
+})
 
-                }
-                else {
-                    inputs(this.textContent, this.textContent)
-                }
-            }
-        }
-    });
-}
 
+// answwer Button
+answerBtn.addEventListener("click", function () {
+    if (answerDisplay.textContent === "") {
+        answerDisplay.textContent = "";
+        inputs("Ans", answer)
+        console.log("if ran")
+    }
+    else {
+        inputArray = [];
+        answerArray = [];
+        answerDisplay.textContent = "";
+        inputs("Ans", answer)
+        console.log("else ran")
+
+    }
+})
 
 equalToBtn.addEventListener("click", function () {
     // Equal to
@@ -67,19 +77,21 @@ equalToBtn.addEventListener("click", function () {
         equalTo(sumOfNum)
     }
     else if (conditionalValue === 4) {
-        groupAnswerArray = answerArray.join("");
         NumberSystemCalc(2)
+    }
+    else if (conditionalValue === 8) {
+        NumberSystemCalc(8)
     }
     else {
         equalTo(1)
-        console.log("mummy")
     }
 });
 // cleaR ALL
 acClearBtn.addEventListener("click", function () {
     SpecialInputs("", "", 0)
     avrgNumOn = false;
-    BinaryStateOn = false
+    BinaryStateOn = false;
+    octetStateOn = false;
     didYouDelete = false;
 });
 
@@ -145,20 +157,34 @@ rootsBtn.addEventListener("click", function () {
 numberSystemBtn.addEventListener("click", function () {
     if (stateOn) {
         // square
-        inputs("^2", "**2")
-    }
-    else {
-        //   off
-        // Binary
-        BinaryStateOn = !BinaryStateOn
-        if (BinaryStateOn) {
-            SpecialInputs("bin", "", 4)
+        // octal base system
+        octetStateOn = !octetStateOn
+        if (octetStateOn) {
+            SpecialInputs("oct", "", 8)
 
         }
         else {
             SpecialInputs("", "", 0)
         }
+    }
+    else {
+        //   off
+        // Binary
+        if (answer === 0) {
+            BinaryStateOn = !BinaryStateOn
+            if (BinaryStateOn) {
+                SpecialInputs("bin", "", 4)
 
+            }
+            else {
+                SpecialInputs("", "", 0)
+            }
+
+        }
+        else {
+            ans = Number(answer.toString(2))
+            answerDisplay.textContent = "Ans = " + ans;
+        }
     }
 })
 
@@ -277,7 +303,6 @@ bracketCloseBtn.addEventListener("click", function () {
     }
 })
 
-
 shiftKeyBtn.addEventListener("click", function () {
     stateOn = !stateOn
     if (stateOn) {
@@ -291,13 +316,42 @@ shiftKeyBtn.addEventListener("click", function () {
 })
 
 
+function numericButtonInputs() {
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+            if (inputArray.length < 23) {
+
+                if (Number(inputArray[0]) === 0) {
+                    inputDisplay.textContent = "";
+                    inputArray = []
+                    answerArray = []
+                }
+                else {
+
+                    if (conditionalValue === 1) {
+                        inputArray.push(this.textContent);
+                        groupInputArray = inputArray.join("");
+                        inputDisplay.textContent = "Input;  " + groupInputArray;
+                        didYouDelete = false
+
+                    }
+                    else {
+                        inputs(this.textContent, this.textContent)
+                    }
+                }
+            }
+        });
+    }
+
+}
+
 function backSpace() {
     inputArray.pop();
     answerArray.pop();
     groupInputArray = inputArray.join("");
     inputDisplay.textContent = groupInputArray;
     answerDisplay.textContent = "";
-    anwser = 0;
+    answer = 0;
 }
 
 function inputs(inputArrayInputs, answerArrayInput,) {
@@ -311,9 +365,8 @@ function inputs(inputArrayInputs, answerArrayInput,) {
 function equalTo(numberSum) {
     try {
         groupAnswerArray = answerArray.join("")
-        anwser = eval(groupAnswerArray) / numberSum
-        answerDisplay.textContent = "Ans = " + anwser;
-        console.log("i ran")
+        answer = eval(groupAnswerArray) / numberSum
+        answerDisplay.textContent = "Ans = " + answer;
     }
     catch (err) {
         answerDisplay.textContent = "Syntax Error";
@@ -341,142 +394,135 @@ function commaInputs(input1) {
 
 
 function NumberSystemCalc(base) {
-    // for(var i = 0; i < arr.length; i++){
-    //     if(arr[i] === "+"){
-    // arr[i] = "+";
-    //     }
-    //     else{
-    //         arr[i]+arr[i+1]
-    //     }
-    // }
-
-
-    console.log(answer)
-    var arrlenght = groupAnswerArray.split("+");
-    var x;
-    var y;
-    var sum;
-    for (var i = 0; i < arrlenght.length - 1; i++) {
-        var newArrSplit = groupAnswerArray.split("+")
-        var newArrJoin = newArrSplit.join("+")
-        if (newArrJoin.indexOf("+") != -1) {
-            var numbers = newArrJoin.split("+");
-            if (answer === 0) {
-                x = parseInt(numbers[i], base);
-                y = parseInt(numbers[i + 1], base)
-                sum = x + y;
-
-            }
-            else {
-                x = parseInt(answer, base)
-                y = parseInt(numbers[i + 1], base)
-                sum = x + y
-
-            }
-            console.log("x: " + x, "y: " + y, "numbers: " + numbers, "sum: " + sum)
-            answer = sum.toString(base)
-            newArrSplit.splice(0, 2)
-            newArrSplit.unshift(answer)
-            console.log("newArrsplit: " + newArrSplit, "arrlength: " + arrlenght)
-        }
-
+    splitNumber()
+    baseConversionLoop(base)
+    try {
+        groupAnswerArray = newArray.join("");
+        var ans = eval(groupAnswerArray);
+        answer = Number(ans.toString(base))
+        answerDisplay.textContent = "Ans = " + answer;
     }
-
-
-    // } else if (groupAnswerArray.indexOf("-") != -1) {
-    //     var numbers = groupAnswerArray.split("-");
-    //     var x = parseInt(numbers[0], base);
-    //     var y = parseInt(numbers[1], base);
-    //     var sub = x - y;
-    //     var ans = sub.toString(base);
-    // } else if (groupAnswerArray.indexOf("*") != -1) {
-    //     var numbers = groupAnswerArray.split("*");
-    //     var x = parseInt(numbers[0], base);
-    //     var y = parseInt(numbers[1], base);
-    //     var mul = x * y;
-    //     var ans = mul.toString(base);
-    // } else if (groupAnswerArray.indexOf("/") != -1) {
-    //     var numbers = groupAnswerArray.split("/");
-    //     var x = parseInt(numbers[0], base);
-    //     var y = parseInt(numbers[1], base);
-    //     var div = x / y;
-    //     var ans = div.toString(base);
-    // }
-    //     }
-    answerDisplay.textContent = "Ans = " + answer;
-    console.log(answer)
+    catch (err) {
+        answerDisplay.textContent = "Syntax Error";
+    }
 }
 
-var testArr = ["1", "0", "1", "+", "1", "1", "0", "-", "1", "0", "0", "*", "1", "1", "1"]
-var groupAnswerArray = testArr.join("")
 
-for (var i = 0; i < groupAnswerArray.length; i++) {
-    var plusSign = groupAnswerArray[i] === "+"
-    var minusSign = groupAnswerArray[i] === "-"
-    var divideSign = groupAnswerArray[i] === "/"
-    var multiplySign = groupAnswerArray[i] === "*"
-    var splitSign;
-    var cutSplit;
-    var removeSplit;
-    var minusSplit;
-
-   if (plusSign) {
-        if (splitSign === undefined) {
-            atUndefined("+", plusSign)
-        }
-        else{ 
-            atElse("+", plusSign)
-        }
-    }
-    if (minusSign) {
-        if (splitSign === undefined) {
-            atUndefined("-", minusSign)
+function splitNumber() {
+    let joinStr = "";
+    answerArray.forEach(val => {
+        let numVal = Number(val)
+        if (Number.isNaN(numVal)) {
+            joinStr += `!${val}!`
         }
         else {
-         atElse("-", minusSign);
-         console.log(groupAnswerArray)
+            joinStr += val
+        }
+    })
+    newArray = joinStr.split("!")
+}
+
+function baseConversionLoop(base) {
+    for (let i = 0; i < newArray.length; i++) {
+        let emptyString = newArray[i] === "";
+        if (emptyString) {
+            newArray.splice(i, 1)
+        }
+        let val = Number(newArray[i])
+        if (Number.isNaN(val) === false) {
+            let number = parseInt(newArray[i], base)
+            newArray[i] = number.toString()
         }
     }
-
-    // if (divideSign) {
-    //    if(splitSign === undefined){
-    //        atUndefined("/", divideSign)
-    //    }
-    //    else{
-    //        atElse("/", divideSign)
-    //    }
-    // }
-    if (multiplySign) {
-        if(splitSign === undefined){
-            atUndefined("*", multiplySign)
-        }
-        else{
-            atElse("*", multiplySign)
-            console.log("worked")
-        }
-     }
 }
 
 
-function atUndefined (sign, index){
-    splitSign = groupAnswerArray.split(sign)
-    splitSign.splice(index, 0, sign)
-    cutSplit = splitSign.slice(index - 1, 2)
-    console.log(cutSplit, splitSign)
-}
 
-function atElse(sign, index){
-    splitSign.shift()
-    splitSign.shift()
-    groupAnswerArray = splitSign.join("")
 
-    splitSign = groupAnswerArray.split(sign)
-    splitSign.splice(index, 0, sign)
-    removeSplit = splitSign.splice(index - 1, 2)
-    cutSplit = cutSplit.concat(removeSplit)  
 
-    console.log(removeSplit, cutSplit, splitSign)
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var testArr = ["1", "0", "1", "+", "1", "1", "0", "-", "1", "0", "0", "*", "1", "1", "1"]
+// var groupAnswerArray = testArr.join("")
+
+// for (var i = 0; i < groupAnswerArray.length; i++) {
+//     var plusSign = groupAnswerArray[i] === "+"
+//     var minusSign = groupAnswerArray[i] === "-"
+//     var divideSign = groupAnswerArray[i] === "/"
+//     var multiplySign = groupAnswerArray[i] === "*"
+//     var splitSign;
+//     var cutSplit;
+//     var removeSplit;
+//     var minusSplit;
+
+//    if (plusSign) {
+//         if (splitSign === undefined) {
+//             atUndefined("+", plusSign)
+//         }
+//         else{ 
+//             atElse("+", plusSign)
+//         }
+//     }
+//     if (minusSign) {
+//         if (splitSign === undefined) {
+//             atUndefined("-", minusSign)
+//         }
+//         else {
+//          atElse("-", minusSign);
+//          console.log(groupAnswerArray)
+//         }
+//     }
+
+//     // if (divideSign) {
+//     //    if(splitSign === undefined){
+//     //        atUndefined("/", divideSign)
+//     //    }
+//     //    else{
+//     //        atElse("/", divideSign)
+//     //    }
+//     // }
+//     if (multiplySign) {
+//         if(splitSign === undefined){
+//             atUndefined("*", multiplySign)
+//         }
+//         else{
+//             atElse("*", multiplySign)
+//             console.log("worked")
+//         }
+//      }
+// }
+
+
+// function atUndefined (sign, index){
+//     splitSign = groupAnswerArray.split(sign)
+//     splitSign.splice(index, 0, sign)
+//     cutSplit = splitSign.slice(index - 1, 2)
+//     console.log(cutSplit, splitSign)
+// }
+
+// function atElse(sign, index){
+//     splitSign.shift()
+//     splitSign.shift()
+//     groupAnswerArray = splitSign.join("")
+
+//     splitSign = groupAnswerArray.split(sign)
+//     splitSign.splice(index, 0, sign)
+//     removeSplit = splitSign.splice(index - 1, 2)
+//     cutSplit = cutSplit.concat(removeSplit)  
+
+//     console.log(removeSplit, cutSplit, splitSign)
+// }
 
 
 
